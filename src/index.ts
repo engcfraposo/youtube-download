@@ -6,6 +6,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/healthcheck", (req, res) => {
+    return res.json({green: true});
+});
+
 app.get("/watch", (req: express.Request, res: express.Response) => {
     const { v } = req.query;
     res.header("Content-Disposition", `attachment; filename=video-${v}.mp4`);
