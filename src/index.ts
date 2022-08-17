@@ -2,14 +2,18 @@ import "dotenv/config";
 import express from "express";
 import ytdl from "ytdl-core";
 import cors from "cors";
+import packageJson from "../package.json";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/healthcheck", (req, res) => {
-    return res.json({green: true});
+app.get("/healthcheck", (_req, res) => {
+    return res.json({
+        green: true,
+        version: packageJson.version,
+    });
 });
 
 app.get("/watch", (req: express.Request, res: express.Response) => {
